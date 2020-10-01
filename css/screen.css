@@ -56,6 +56,15 @@
     --global-whitespace-lg: calc(var(--global-baseline) * 4); /*  = 32px */
     --global-whitespace-xl: calc(var(--global-whitespace) * 2); /*  = 48px */
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
+
+    --global-input-backgroundColor: White;
+    --global-input-color: var(--global-color-neutral-xxxx-dark);
+    --global-input-borderColor: var(--global-color-neutral-xxx-light);
+    --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
+    --global-input-focus-borderColor: var(--global-color-alpha);
+    --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+
+
 }
 
 /*------------------------------------*\
@@ -601,10 +610,10 @@ input::placeholder {
     -moz-appearance: none;
     appearance: none;
     width: 100%;
-    border: var(--global-borderWidth) solid var(--global-color-neutral-xxx-light);
+    border: 1px solid var(--global-color-neutral-xxx-light);
     border-radius: var(--global-borderRadius);
-    color: var(--global-color-neutral-xxxx-dark);
-    background-color: White;
+    color: var(--global-input-color);
+    background-color: var(--global-input-backgroundColor);
     font-family: inherit;
     font-size: 16px;
     line-height: calc(var(--global-baseline) * 3);
@@ -623,11 +632,107 @@ input::placeholder {
     box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
 }
 
+.c-option--hidden:checked + .c-custom-option {
+    /*
+      Do magic stuff here, for example:
+      background-color: red;
+    */
+    /* background-color: red; */
+  }
 /* option input for checkboxes and radio buttons */
-
+.c-option--hidden:checked + .c-custom-option .c-custom-option__symbol {
+    /*
+      Do magic stuff here, for example:
+      
+    */
+    opacity: 1;
+    transform: scale(1);
+  }
 .c-option {
     margin-right: var(--global-whitespace-sm);
 }
+
+.c-custom-option{
+    display: flex;
+    align-items: center;
+    --custom-option-borderColor: var(--global-input-borderColor);
+    --custom-option-focus-bordercolor: var(--global-input-focus-borderColor);
+}
+
+.c-custom-option__symbol{
+    opacity: 0;
+    display: block;
+    /* 
+        save to us in transition:
+            -opacity
+            -transform  
+    */
+    
+    transition: opacity 150ms ease-in, transform 150ms ease-in;
+}
+
+.c-custom-option__fake-input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--global-whitespace-md);
+    height: var(--global-whitespace-md);
+    border: 1px solid var(--custom-option-bordercolor);
+    margin-right: var(--global-whitespace-sm);
+    /* box-shadow: var(--global-input-boxShadow); */
+    border-radius: var(--global-borderRadius);
+    
+}
+
+.c-option--hidden:focus + .c-custom-option{
+    
+}
+
+.c-option--hidden:hover{
+--custom-option-borderColor: var(--custom-option-hover-borderColor)
+}
+
+.c-option--hidden:hover + .c-custom-option .c-custom-option__fake-input{
+    border: 1px solid var(--global-color-neutral-xx-light);
+}
+
+.c-option--hidden:focus + .c-custom-option .c-custom-option__fake-input,.c-option--hidden:active+ .c-custom-option .c-custom-option__fake-input{
+    border: 1px solid #81abf0;
+    box-shadow: var(--global-input-boxShadow);
+}
+
+.c-option-list{
+    margin-bottom: 24px;
+}
+
+.c-option-list__item{
+    margin-bottom: 12px;
+}
+
+.c-custom-option__fake-input--checkbox{
+    display: flex;
+    border-radius: var(--global-borderRadius);
+}
+
+.c-custom-option__fake-input--radio{
+    display: flex;
+    border-radius: 50%;
+}
+
+.c-custom-option__fake-input--checkbox .c-custom-option__symbol {
+    width: 10px;
+    height: 10px;
+    fill: var(--global-color-alpha);
+}
+  
+.c-custom-option__fake-input--radio .c-custom-option__symbol {
+    width: 6px;
+    height: 6px;
+    background: var(--global-color-alpha);
+    border-radius: 50%;
+}
+
+
 
 /*
     Component: Label
