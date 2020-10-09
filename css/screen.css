@@ -677,7 +677,7 @@ input::placeholder {
     justify-content: center;
     width: var(--global-whitespace-md);
     height: var(--global-whitespace-md);
-    border: 1px solid var(--custom-option-bordercolor);
+    border: 1px solid var(--custom-option-borderColor); /* altijd hoofdletters checken moron*/
     margin-right: var(--global-whitespace-sm);
     /* box-shadow: var(--global-input-boxShadow); */
     border-radius: var(--global-borderRadius);
@@ -730,6 +730,66 @@ input::placeholder {
     height: 6px;
     background: var(--global-color-alpha);
     border-radius: 50%;
+}
+
+.c-custom-toggle{
+    display: flex;
+    align-items: center;
+
+}
+.c-custom-toggle__fake-input{
+    display: block;
+    margin-right: 16px;
+    height: 24px;
+    width: 48px;
+    border: 1px solid var(--global-color-neutral-xxx-light);
+    background-color: var(--global-color-neutral-xxxx-light);
+    border-radius: 24px;
+}
+
+.c-option--hidden:focus + .c-custom-toggle .c-custom-toggle__fake-input{
+    border: 1px solid #81adf0;
+    box-shadow: var(--global-input-boxShadow);
+}
+
+.c-toggle-list__item + .c-toggle-list__item{
+    margin-top: 24px;  
+}
+
+.c-custom-toggle--inverted{ 
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.c-custom-toggle--inverted .c-custom-toggle__fake-input{
+    margin-right: 0;
+}
+
+
+
+
+
+.c-custom-toggle__fake-input::before{
+    display: block;
+    content: "";
+    height: 22px;
+    width: 22px;
+    border-radius: 24px;
+    transform: translateX(0px);
+    transition: all var(--global-transitionTiming-alpha);
+    border-color: #707070;
+    background-color: white;
+    box-shadow: 0 1px 3px #00000029;
+}
+
+
+input:checked + .c-custom-toggle .c-custom-toggle__fake-input::before {
+    transform: translateX(24px);
+}
+
+input:checked + .c-custom-toggle .c-custom-toggle__fake-input{
+    background-color: var(--global-color-alpha);
+    border-color: var(--global-color-alpha-dark);
 }
 
 
